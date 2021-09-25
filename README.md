@@ -1,70 +1,61 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## App => 
 
-In the project directory, you can run:
+## BrowserRouter (contains a history obj which keeps track of address bar and can change it as well)=>
 
-### `npm start`
+## Header(=> Links to component's path)+Route(contains path and component) =>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## oAuth flow (oAuth google scopes give us access to a portion of user account data) =>
+## GoogleAuth.js => click event handlers (for signIN btn) =>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## reduers and action creaters for handling state(auth info and userId) => 
+## Redux forms :- import built in reducer and add 'form' to redux-store and store form values in it.
 
-### `npm test`
+## Handle Stream Componenets ##
+1. StreamCreate => 
+  import Field and Redux-form
+  'Field' :- for any form element/elements - name, component + any other props for the component
+  'redux-form' :- syntax similar to connect, take {form: FORM_NAME} as first argument and component name as second argument
+  functions created :- renderInput, renderError, onSubmit in class and validate in component
+  onSubmit :- createStream action creater is called with formValues that send an axios request
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2.StreamList =>
+  import fetchStream action creater, connect funtion and Link
+  functions created :- 
+    renderAdmin : to render edit and delete btn on selected streams
+    renderList : to render list items
+    renderCreateBtn : used Link to connect it to 'stream/new'
+  mapStrateToProps : return streams(an array of streams), currentUserId, isSignedIn
 
-### `npm run build`
+3. StreamEdit =>  
+  componentDidMount : to fetch streams call action-creator(incase not there)
+  function created :-
+    onSubmit : updateStream action-creator and use history obj to navigate to home screen
+  render : 'loading' when no stream present & StreamForm when stream is present with initial values(only pick title & desription) and onSubmit
+  mapStateToProps : return stream from state.streams with id given in params
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. StreamDelete => 
+  worked with models and portals
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. StreamShow => 
+  same procedure done for StreamEdit
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## It's not a best practice to allow a component to manage state ##
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Router from react-router-dom passes some very useful props automatically to the component ##
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Browser Router ##
+creates a history object used to watch and manipulate browser address
+this history obj is available only to Router components
+so if we hv to use history obj outside the Router components like action-creaters, 
+  => either pass it to them
+  => or create a history obj ourselves and pass it to a plain Router
+=> create history obj
+=> import and pass history obj in plain router
+=> import history obj in the action creater and push the route you wanna go to
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Portals ##
+These are used when we want to render a componenet but not as a direct child but a child of some other element
+mostly the body. Usually used to escape stacking context(in CSS) and for models.
