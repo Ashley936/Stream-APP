@@ -1,16 +1,16 @@
 
 
-## App => 
+### App => 
 
-## BrowserRouter (contains a history obj which keeps track of address bar and can change it as well)=>
+### BrowserRouter (contains a history obj which keeps track of address bar and can change it as well)=>
 
-## Header(=> Links to component's path)+Route(contains path and component) =>
+### Header(=> Links to component's path)+Route(contains path and component) =>
 
-## oAuth flow (oAuth google scopes give us access to a portion of user account data) =>
-## GoogleAuth.js => click event handlers (for signIN btn) =>
+### oAuth flow (oAuth google scopes give us access to a portion of user account data) =>
+### GoogleAuth.js => click event handlers (for signIN btn) =>
 
-## reduers and action creaters for handling state(auth info and userId) => 
-## Redux forms :- import built in reducer and add 'form' to redux-store and store form values in it.
+### reduers and action creaters for handling state(auth info and userId) => 
+### Redux forms :- import built in reducer and add 'form' to redux-store and store form values in it.
 
 ## Handle Stream Componenets ##
 1. StreamCreate => 
